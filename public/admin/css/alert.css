@@ -1,0 +1,35 @@
+
+    /* Custom styling for the SweetAlert2 popup */
+    .custom-swal-popup {
+        background-color: #6c7b95 !important; /* Warna abu-abu */
+        border-radius: 15px; /* Membulatkan sudut */
+    }
+
+    /* Ikon lonceng */
+    .swal2-html-container i {
+        color: #ffffff; /* Warna putih */
+    }
+
+    /* Teks */
+    .swal2-html-container p {
+        color: #ffffff; /* Warna putih untuk teks */
+    }
+
+    /* Tombol OK */
+    .custom-confirm-button {
+        background-color: #6c7b95 !important; /* Warna hijau */
+        color: white !important; /* Teks putih */
+        border: 3px solid #ffffff !important;
+        border-radius: 5px;
+        padding: 10px 20px;
+    }
+
+    /* Tombol Cancel */
+    .custom-cancel-button {
+        background-color: #6c7b95 !important; /* Warna merah */
+        color: white !important; /* Teks putih */
+        border: 3px solid #ffffff !important;
+        border-radius: 5px;
+        padding: 10px 20px;
+        margin-left: 10px;
+    }
