@@ -10,7 +10,7 @@
                                 {{-- <h4 class="mb-2">{{ $completedTasks }}</h4> --}}
                                 <span class="text-gray-600">Klinik</span>
                                 <div class="flex-between gap-8 mt-16">
-                                    <span class="flex-shrink-0 w-48 h-48 flex-center rounded-circle bg-main-600 text-white text-2xl"><i class="ph-fill ph-book-open"></i></span>
+                                    <span class="flex-shrink-0 w-48 h-48 flex-center rounded-circle bg-main-600 text-white text-2xl"><i class="fas fa-clinic-medical"></i></span>
                                     <div id="complete-course" class="remove-tooltip-title rounded-tooltip-value"></div>
                                 </div>
                             </div>
@@ -202,7 +202,7 @@
                             </div>
                             <div class="p-xl-4 py-16 px-12 flex-between gap-8 rounded-8 border border-gray-100 hover-border-gray-200 transition-1 mb-16">
                                 <div class="flex-align flex-wrap gap-8">
-                                    <span class="text-main-600 bg-main-50 w-44 h-44 rounded-circle flex-center text-2xl flex-shrink-0"><i class="ph-fill ph-graduation-cap"></i></span>
+                                    <span class="text-main-600 bg-main-50 w-44 h-44 rounded-circle flex-center text-2xl flex-shrink-0"><i class="fas fa-clinic-medical"></i></span>
                                     <div>
                                         <h6 class="mb-0">Klinik</h6>
                                     </div>
@@ -211,7 +211,7 @@
                             </div>
                             <div class="p-xl-4 py-16 px-12 flex-between gap-8 rounded-8 border border-gray-100 hover-border-gray-200 transition-1 mb-16">
                                 <div class="flex-align flex-wrap gap-8">
-                                    <span class="text-main-600 bg-main-50 w-44 h-44 rounded-circle flex-center text-2xl flex-shrink-0"><i class="ph ph-code"></i></span>
+                                    <span class="text-main-600 bg-main-50 w-44 h-44 rounded-circle flex-center text-2xl flex-shrink-0"><i class="ph-fill ph-users-three"></i></span>
                                     <div>
                                         <h6 class="mb-0">Pasien</h6>
                                     </div>
@@ -220,7 +220,7 @@
                             </div>
                             <div class="p-xl-4 py-16 px-12 flex-between gap-8 rounded-8 border border-gray-100 hover-border-gray-200 transition-1">
                                 <div class="flex-align flex-wrap gap-8">
-                                    <span class="text-main-600 bg-main-50 w-44 h-44 rounded-circle flex-center text-2xl flex-shrink-0"><i class="ph ph-bezier-curve"></i></span>
+                                    <span class="text-main-600 bg-main-50 w-44 h-44 rounded-circle flex-center text-2xl flex-shrink-0"><i class="ph-fill ph-users-three"></i></span>
                                     <div>
                                         <h6 class="mb-0">Akun</h6>
                                     </div>

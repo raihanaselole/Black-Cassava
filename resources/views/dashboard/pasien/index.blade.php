@@ -9,8 +9,6 @@
                 </button>
             </div>
         @endif
-
-        <h4 class="mb-4">Daftar Pasien dan Antrian</h4>
         <a href="{{ url('dashboard/pasien/create') }}" class="btn btn-primary mb-3">+ Tambah Pasien</a>
 
         <table class="table table-striped mt-15">

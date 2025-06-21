@@ -8,6 +8,7 @@ use App\Models\Antrian;
 use App\Models\Klinik;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Cookie;
 
 
 class PasienController extends Controller
@@ -20,7 +21,7 @@ class PasienController extends Controller
         // Ambil semua pasien beserta antriannya
         // $pasiens = Pasien::with('antrian')->orderBy('tanggal', 'desc')->get();
 
-        // return view('dashboard.pasien.index', compact('pasiens'));
+
         $pasiens = Pasien::with(['klinik', 'antrian'])->get();
         return view('dashboard.pasien.index', compact('pasiens'));
     }
@@ -30,6 +31,9 @@ class PasienController extends Controller
      */
     public function create()
     {
+        $kliniks = Klinik::all(); // Ambil semua data klinik
+        return view('landingpage.pendaftaran', compact('kliniks'));
+        
         $kliniks = Klinik::all(); // ambil semua data klinik
         return view('dashboard.pasien.create', compact('kliniks'));
     }
@@ -40,50 +44,61 @@ class PasienController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-        'klinik_id' => 'required|exists:kliniks,id',
-        'nama' => 'required|string|max:255',
-        'tanggal' => 'required|date',
-        'keluhan' => 'required|string',
-        'nik' => 'required|string|max:16',
-    ]);
-
-    DB::beginTransaction();
-
-    try {
-        // Simpan data pasien
-        $pasien = Pasien::create([
-            'klinik_id' => $request->klinik_id,
-            'nama' => $request->nama,
-            'status' => 'not started',
-            'tanggal' => $request->tanggal,
-            'keluhan' => $request->keluhan,
-            'nik' => $request->nik,
+            'klinik_id' => 'required|exists:kliniks,id',
+            'nama' => 'required|string|max:255',
+            'tanggal' => 'required|date',
+            'keluhan' => 'required|string',
+            'nik' => 'required|string|max:16',
         ]);
 
-        // Hitung nomor antrian terakhir untuk klinik dan tanggal yang sama
-        $tanggal = Carbon::parse($request->tanggal)->toDateString();
-        $lastNomor = Antrian::where('klinik_id', $request->klinik_id)
-            ->where('tanggal', $tanggal)
-            ->max('nomor');
+        DB::beginTransaction();
 
-        $nextNomor = $lastNomor ? $lastNomor + 1 : 1;
+        try {
+            $pasien = Pasien::create([
+                'klinik_id' => $request->klinik_id,
+                'nama' => $request->nama,
+                'status' => 'not started',
+                'tanggal' => $request->tanggal,
+                'keluhan' => $request->keluhan,
+                'nik' => $request->nik,
+            ]);
 
-        // Simpan data antrian
-        Antrian::create([
-            'pasien_id' => $pasien->id,
-            'klinik_id' => $request->klinik_id,
-            'tanggal' => $tanggal,
-            'nomor' => $nextNomor,
-        ]);
+            $tanggal = Carbon::parse($request->tanggal)->toDateString();
+            $lastNomor = Antrian::where('klinik_id', $request->klinik_id)
+                ->where('tanggal', $tanggal)
+                ->max('nomor');
+            $nextNomor = $lastNomor ? $lastNomor + 1 : 1;
 
-        DB::commit();
+            Antrian::create([
+                'pasien_id' => $pasien->id,
+                'klinik_id' => $request->klinik_id,
+                'tanggal' => $tanggal,
+                'nomor' => $nextNomor,
+            ]);
 
-        return redirect()->route('pasien.index')->with('pesan', 'Pasien berhasil ditambahkan dengan nomor antrian: ' . $nextNomor);
-    } catch (\Exception $e) {
-        DB::rollback();
-        return redirect()->back()->withErrors('Terjadi kesalahan: ' . $e->getMessage());
+            DB::commit();
+
+            // 🔍 Deteksi asal form dari input hidden 'source'
+            if ($request->input('source') === 'user') {
+                return redirect()->route('landingpage.antrian', ['klinik_id' => $request->klinik_id])
+                    ->withCookies([
+                        cookie()->forever('nomor_antrian', $nextNomor),
+                        cookie()->forever('klinik_id', $request->klinik_id),
+                        cookie()->forever('pasien_nama', $pasien->nama),
+                    ]);
+
+            }
+
+            // Default: dari dashboard admin
+            return redirect()->route('pasien.index')
+                ->with('pesan', 'Pasien berhasil ditambahkan dengan nomor antrian: ' . $nextNomor);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors('Terjadi kesalahan: ' . $e->getMessage());
+        }
     }
-    }
+
 
     /**
      * Display the specified resource.

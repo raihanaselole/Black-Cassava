@@ -42,7 +42,7 @@
                       <div class="p-24">
                           @foreach ($notifications as $notification)
                               <div class="d-flex align-items-start gap-12 mb-24">
-                                  <img src="{{ asset('admin/images/6.svg')}}" alt="" class="w-48 h-48 rounded-circle object-fit-cover">
+                                  <img src="{{ asset('admin/images/logo.png')}}" alt="" class="w-48 h-48 rounded-circle object-fit-cover">
                                   <div class="border-bottom border-gray-100 pb-24">
                                       <div class="flex-align gap-4">
                                           <a href="#" class="fw-medium text-15 mb-0 text-gray-300 hover-text-main-600 text-line-2">

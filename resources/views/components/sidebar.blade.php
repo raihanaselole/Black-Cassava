@@ -1,12 +1,19 @@
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/css/icons.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.0.3/src/css/icons.min.css">
+<!-- Phosphor Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.0.3/src/css/icons.min.css">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+
 
 <aside class="sidebar">
   <!-- sidebar close btn -->
    <button type="button" class="sidebar-close-btn text-gray-500 hover-text-white hover-bg-main-600 text-md w-24 h-24 border border-gray-100 hover-border-main-600 d-xl-none d-flex flex-center rounded-circle position-absolute"><i class="ph ph-x"></i></button>
   <!-- sidebar close btn -->
   
-  <a href="index.html" class="sidebar__logo text-center p-20 position-sticky inset-block-start-0 bg-white w-35 px z-1 pb-10">
+  <a href="{{ url('dashboard') }}" class="sidebar__logo text-center p-20 position-sticky inset-block-start-0 bg-white w-35 px z-1 pb-10">
       <img src="{{ asset('admin/images/logo.png')}}" alt="Logo">
   </a>
 
@@ -21,7 +28,7 @@
               </li>
               <li class="sidebar-menu__item">
                 <a href="{{ url('dashboard/klinik') }}" class="sidebar-menu__link">
-                    <span class="icon"><i class="bi bi-hospital"></i></span>
+                    <span class="icon"><i class="fas fa-clinic-medical"></i></span>
                     <span class="text">klinik</span>
                 </a>
               </li>
@@ -32,7 +39,7 @@
                   </a>
               </li>
               <li class="sidebar-menu__item">
-                  <a href="{{ url('dashboard/akun') }}" class="sidebar-menu__link">
+                  <a href="{{ url('dashboard/users') }}" class="sidebar-menu__link">
                       <span class="icon"><i class="ph ph-users-three"></i></span>
                       <span class="text">akun</span>
                   </a>

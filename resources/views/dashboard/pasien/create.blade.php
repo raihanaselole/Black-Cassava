@@ -3,7 +3,8 @@
 
         <form action="{{ route('pasien.store') }}" method="POST">
             @csrf
-
+            <input type="hidden" name="source" value="admin">
+            
             <div class="form-group row">
                 <label for="klinik_id" class="col-sm-4 col-form-label">Pilih Klinik</label>
                 <div class="col-sm-8">
