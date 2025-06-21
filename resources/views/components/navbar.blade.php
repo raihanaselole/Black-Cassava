@@ -1,4 +1,6 @@
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
+
 <div class="flex-align gap-16">
   <!-- Toggle Button Start -->
    <button type="button" class="toggle-btn d-xl-none d-flex text-26 text-gray-500"><i class="ph ph-list"></i></button>
@@ -34,31 +36,11 @@
                               </div>
                           </div>
                       </div>
-                      @php
-                      $notifications = Cache::get('notifications', []);
-                  @endphp
   
-                  @if ($notifications)
                       <div class="p-24">
-                          @foreach ($notifications as $notification)
                               <div class="d-flex align-items-start gap-12 mb-24">
-                                  <img src="{{ asset('admin/images/logo.png')}}" alt="" class="w-48 h-48 rounded-circle object-fit-cover">
-                                  <div class="border-bottom border-gray-100 pb-24">
-                                      <div class="flex-align gap-4">
-                                          <a href="#" class="fw-medium text-15 mb-0 text-gray-300 hover-text-main-600 text-line-2">
-                                              {{ $notification['message'] }}
-                                          </a>
-                                      </div>
-                                  </div>
                               </div>
-                          @endforeach
                       </div>
-                  @else
-                      <div class="p-24">
-                          <p class="text-center text-gray-500">No new notifications</p>
-                      </div>
-                  @endif
-                      <a href="#" class="py-13 px-24 fw-bold text-center d-block text-primary-600 border-top border-gray-100 hover-text-decoration-underline"> View All </a>
 
                   </div>
               </div>
@@ -73,7 +55,7 @@
   <div class="dropdown">
       <button class="users arrow-down-icon border border-gray-200 rounded-pill p-4 d-inline-block pe-40 position-relative" type="button" data-bs-toggle="dropdown" aria-expanded="false">
           <span class="position-relative">
-              <img src="{{ asset('admin/images/6.svg')}}" alt="Image" class="h-32 w-32 rounded-circle">
+              <img src="{{ asset('admin/images/logo.png')}}" alt="Image" class="h-32 w-32 rounded-circle">
               <span class="activation-badge w-8 h-8 position-absolute inset-block-end-0 inset-inline-end-0"></span>
           </span>
       </button>
@@ -81,34 +63,34 @@
           <div class="card border border-gray-100 rounded-12 box-shadow-custom">
               <div class="card-body">
                   <div class="flex-align gap-8 mb-20 pb-20 border-bottom border-gray-100">
-                      <img src="{{ asset('admin/images/6.svg')}}" alt="" class="w-54 h-54 rounded-circle">
+                      <img src="{{ asset('admin/images/logo.png')}}" alt="" class="w-54 h-54 rounded-circle">
                       <div class="">
-                          {{-- <h4 class="mb-0">{{ Auth::user()->name }}</h4>
-                          <p class="fw-medium text-13 text-gray-200">Role: {{ Auth::user()->role }}</p> --}}
+                          <h4 class="mb-0">{{ Auth::user()->name }}</h4>
+                          <p class="fw-medium text-13 text-gray-200">Role: {{ Auth::user()->role }}</p>
                       </div>
                   </div>
                   <ul class="max-h-270 overflow-y-auto scroll-sm pe-4">
                       <li class="mb-4">
-                          <a href="{{ url('dashboard/progres') }}" class="py-12 text-15 px-20 hover-bg-gray-50 text-gray-300 rounded-8 flex-align gap-8 fw-medium text-15">
+                          <a href="{{ url('dashboard/klinik') }}" class="py-12 text-15 px-20 hover-bg-gray-50 text-gray-300 rounded-8 flex-align gap-8 fw-medium text-15">
                               <span class="text-2xl text-primary-600 d-flex"><i class="ph ph-chart-bar"></i></span>
-                              <span class="text">Upgrade Progres</span>
+                              <span class="text">Update KLinik</span>
                           </a>
                       </li>
                       <li class="mb-4">
-                          <a href="{{ url('dashboard/statistik') }}" class="py-12 text-15 px-20 hover-bg-gray-50 text-gray-300 rounded-8 flex-align gap-8 fw-medium text-15">
+                          <a href="{{ url('dashboard/pasien') }}" class="py-12 text-15 px-20 hover-bg-gray-50 text-gray-300 rounded-8 flex-align gap-8 fw-medium text-15">
                               <span class="text-2xl text-primary-600 d-flex"><i class="ph ph-chart-line-up"></i></span>
-                              <span class="text">Total Statistic</span>
+                              <span class="text">Update Pasien</span>
                           </a>
                       </li>
                       <li class="pt-8 border-top border-gray-100">
-                        {{-- <a href="sign-in.html" class="py-12 text-15 px-20 hover-bg-danger-50 text-gray-300 hover-text-danger-600 rounded-8 flex-align gap-8 fw-medium text-15">
+                        <a href="sign-in.html" class="py-12 text-15 px-20 hover-bg-danger-50 text-gray-300 hover-text-danger-600 rounded-8 flex-align gap-8 fw-medium text-15">
                               <span class="text-2xl text-danger-600 d-flex"><a class="dropdown-item" href="{{ route('logout') }}"
                                 onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                  {{ __('Logout') }}
                         </a></span>
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
-                        </form> --}}
+                        </form>
                             
                           </a>
                       </li>

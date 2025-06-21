@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Info Klinik - Antri Klinik</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('admin/images/logo.png')}}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
@@ -145,7 +146,7 @@
 
     {{-- Hero Section --}}
     <section class="text-center py-5">
-        <h3 class="fw-bold text-info">INFO KLINIK DEPOK</h3>
+        <h3 style="color: #006871;">INFO KLINIK DEPOK</h3>
     </section>
 
     {{-- Info Klinik --}}
@@ -154,42 +155,42 @@
         {{-- Card 1 --}}
         <div class="klinik-card">
             <div class="col-md-5">
-                <img src="{{ asset('admin/images/klinik-agha.jpg') }}" alt="Klinik AGHA" class="klinik-image">
+                <img src="{{ asset('admin/images/Klinik Agha Depok.png') }}" alt="Klinik AGHA" class="klinik-image">
             </div>
             <div class="klinik-info col-md-7">
                 <h5 class="fw-bold">KLINIK AGHA</h5>
                 <p><i class="fas fa-map-marker-alt icon"></i> Jl. Bojong Rangkek I, Cipayung Jaya, Kota Depok</p>
                 <p><i class="fas fa-phone icon"></i> 0822-7560-1002</p>
                 <p><i class="fas fa-clock icon"></i> Buka 24 Jam</p>
-                <a href="#" class="text-decoration-underline text-info">Lihat di Google Maps</a>
+                <a href="https://maps.app.goo.gl/R6S7PzJAPg8dhV9d7" class="text-decoration-underline text-info">Lihat di Google Maps</a>
             </div>
         </div>
 
         {{-- Card 2 --}}
         <div class="klinik-card">
             <div class="col-md-5">
-                <img src="{{ asset('admin/images/klinik-kita.jpg') }}" alt="Klinik Kita" class="klinik-image">
+                <img src="{{ asset('admin/images/Klinik Kita Depok.png') }}" alt="Klinik Kita" class="klinik-image">
             </div>
             <div class="klinik-info col-md-7">
                 <h5 class="fw-bold">KLINIK KITA 1 & 2</h5>
                 <p><i class="fas fa-map-marker-alt icon"></i> Jl. Jambi No.17, Grogol, Limo, Kota Depok</p>
                 <p><i class="fas fa-phone icon"></i> (021)77268810</p>
                 <p><i class="fas fa-clock icon"></i> Buka 24 Jam</p>
-                <a href="#" class="text-decoration-underline text-info">Lihat di Google Maps</a>
+                <a href="https://maps.app.goo.gl/fUQcfHyTmnF2iN499" class="text-decoration-underline text-info">Lihat di Google Maps</a>
             </div>
         </div>
 
         {{-- Card 3 --}}
         <div class="klinik-card">
             <div class="col-md-5">
-                <img src="{{ asset('admin/images/klinik-ihc.jpg') }}" alt="Klinik IHC" class="klinik-image">
+                <img src="{{ asset('admin/images/klinik ihc.jpg') }}" alt="Klinik IHC" class="klinik-image">
             </div>
             <div class="klinik-info col-md-7">
                 <h5 class="fw-bold">Klinik Utama Pertamina IHC Depok</h5>
                 <p><i class="fas fa-map-marker-alt icon"></i> Jl. Margonda, Pondok Cina, Kota Depok</p>
                 <p><i class="fas fa-clock icon"></i> 08:00–22:00</p>
                 <p><i class="fas fa-phone icon"></i> 0819-5262-5003</p>
-                <a href="#" class="text-decoration-underline text-info">Lihat di Google Maps</a>
+                <a href="https://maps.app.goo.gl/7vyyM8DNBcRgNNDb9" class="text-decoration-underline text-info">Lihat di Google Maps</a>
             </div>
         </div>
 

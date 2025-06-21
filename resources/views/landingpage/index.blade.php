@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Beranda - Antri Klinik</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('admin/images/logo.png')}}" />
     <!-- Bootstrap & Font -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
@@ -173,7 +173,7 @@
                 <div class="col-md-6 mb-4 mb-md-0">
                     <h2>Selamat Datang di<br><span class="text-primary">Antri Klinik</span></h2>
                     <p>Solusi Antrian Digital Yang Cepat, Praktis, dan Nyaman</p>
-                    <a href="#" class="btn btn-teal mt-3">Daftar Sekarang</a>
+                    <a href="{{ auth()->check() ? route('landingpage.pendaftaran') : route('login') }}" class="btn btn-teal mt-3">Daftar Sekarang</a>
                 </div>
                 <div class="col-md-6 text-center">
                     <img src="{{ asset('admin/images/welcome.png') }}" alt="Hero" class="img-fluid" style="max-height: 300px;">
@@ -228,7 +228,7 @@
                 <p>
                     Sistem kami juga terus diperbarui demi memberikan pengalaman pengguna terbaik. Tak perlu lagi khawatir ketinggalan nomor atau mengantri dalam waktu lama.
                 </p>
-                <a href="{{ url('/pendaftaran') }}" class="btn btn-success mt-3">Daftar Sekarang</a>
+                <a href="{{ auth()->check() ? route('landingpage.pendaftaran') : route('login') }}" class="btn btn-success mt-3">Daftar Sekarang</a>
             </div>
         </div>
     </div>

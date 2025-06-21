@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Antrian Klinik</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('admin/images/logo.png')}}" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         .hero {
@@ -148,13 +149,13 @@
         <div class="row align-items-center">
             <!-- Kolom Kiri: Teks -->
             <div class="col-lg-6 mb-4 mb-lg-0">
-                <h2 class="text-primary fw-bold">Pendaftaran Antrian Klinik</h2>
+                <h2 style="color: #006871;">Pendaftaran Antrian Klinik</h2>
                 <p class="text-secondary">Mudah dan Efisien dalam Daftar Antrian</p>
                 <p class="mb-4">
                     Daftarkan diri Anda secara online dengan mudah dan cepat. Pantau status pemeriksaan Anda, 
                     perbarui data pribadi, dan nikmati pelayanan tanpa antre panjang.
                 </p>
-                <a href="#" class="btn btn-success">Daftar Sekarang</a>
+                <a href="{{ auth()->check() ? route('landingpage.pendaftaran') : route('login') }}" class="btn btn-success">Daftar Sekarang</a>
             </div>
 
             <!-- Kolom Kanan: Gambar -->
@@ -204,7 +205,7 @@
 <!-- Statistik Antrian -->
 <section class="py-5">
     <div class="container text-center">
-        <h4 class="text-primary mb-4">Antrian Klinik</h4>
+        <h4 style="color: #006871;">Antrian Klinik</h4>
         <p class="text-muted">Data antrian hari ini</p>
         <div class="row justify-content-center">
             <div class="col-md-3 col-sm-6 mb-3">

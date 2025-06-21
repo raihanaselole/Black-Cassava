@@ -7,7 +7,7 @@
                     <div class="col-xxl-3 col-sm-6">
                         <div class="card">
                             <div class="card-body">
-                                {{-- <h4 class="mb-2">{{ $completedTasks }}</h4> --}}
+                                <h4 class="mb-2">{{ $totalKlinik }}</h4>
                                 <span class="text-gray-600">Klinik</span>
                                 <div class="flex-between gap-8 mt-16">
                                     <span class="flex-shrink-0 w-48 h-48 flex-center rounded-circle bg-main-600 text-white text-2xl"><i class="fas fa-clinic-medical"></i></span>
@@ -19,7 +19,7 @@
                     <div class="col-xxl-3 col-sm-6">
                         <div class="card">
                             <div class="card-body">
-                                {{-- <h4 class="mb-2">{{ $notStartedTasks }}</h4> --}}
+                                <h4 class="mb-2">{{ $totalPasien }}</h4>
                                 <span class="text-gray-600">Pasien Terdaftar</span>
                                 <div class="flex-between gap-8 mt-16">
                                     <span class="flex-shrink-0 w-48 h-48 flex-center rounded-circle bg-main-two-600 text-white text-2xl"><i class="ph-fill ph-certificate"></i></span>
@@ -31,7 +31,7 @@
                     <div class="col-xxl-3 col-sm-6">
                         <div class="card">
                             <div class="card-body">
-                                {{-- <h4 class="mb-2">{{ $inProgressTasks }}</h4> --}}
+                                <h4 class="mb-2">{{ $inProgress }}</h4>
                                 <span class="text-gray-600">Pasien Dalam Pemeriksaan</span>
                                 <div class="flex-between gap-8 mt-16">
                                     <span class="flex-shrink-0 w-48 h-48 flex-center rounded-circle bg-purple-600 text-white text-2xl"><i class="ph-fill ph-users-three"></i></span>
@@ -43,7 +43,7 @@
                     <div class="col-xxl-3 col-sm-6">
                         <div class="card">
                             <div class="card-body">
-                                {{-- <h4 class="mb-2">{{ $reminderCount }}</h4> --}}
+                                <h4 class="mb-2">{{ $completed }}</h4>
                                 <span class="text-gray-600">Telah Diperiksa</span>
                                 <div class="flex-between gap-8 mt-16">
                                     <span class="flex-shrink-0 w-48 h-48 flex-center rounded-circle bg-warning-600 text-white text-2xl"><i class="ph-fill ph-users-three"></i></span>
