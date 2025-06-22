@@ -12,24 +12,20 @@ class LandingPageController extends Controller
     public function antrian(Request $request)
     {
         $kliniks = Klinik::all();
-        $selectedKlinikId = $request->input('klinik_id'); // dari query string (?klinik_id=...)
-        $tanggal = now()->toDateString(); // hari ini
+        $selectedKlinikId = $request->input('klinik_id');
+        $pasienId = $request->input('pasien_id'); // ambil dari URL
+        $tanggal = now()->toDateString();
 
         $statistik = [
             'menunggu' => 0,
             'dilayani' => 0,
             'selesai' => 0,
         ];
-        $nomorAntrian = $request->cookie('nomor_antrian');
-        $cookieKlinikId = $request->cookie('klinik_id');
-        $pasienNama = $request->cookie('pasien_nama');
 
-        // Pakai klinik_id dari query (GET), atau fallback ke cookie
-        $selectedKlinikId = $request->input('klinik_id', $cookieKlinikId);
+        $pasien = null;
+        $nomorAntrian = null;
 
-
-
-        // Kalau ada klinik terpilih
+        // Statistik
         if ($selectedKlinikId) {
             $statistik['menunggu'] = DB::table('antrians')
                 ->join('pasiens', 'antrians.pasien_id', '=', 'pasiens.id')
@@ -42,15 +38,21 @@ class LandingPageController extends Controller
                 ->join('pasiens', 'antrians.pasien_id', '=', 'pasiens.id')
                 ->where('antrians.klinik_id', $selectedKlinikId)
                 ->where('antrians.tanggal', $tanggal)
-                ->where('pasiens.status', 'in progress') // pastikan ini sesuai data
+                ->where('pasiens.status', 'in progress')
                 ->count();
 
             $statistik['selesai'] = DB::table('antrians')
                 ->join('pasiens', 'antrians.pasien_id', '=', 'pasiens.id')
                 ->where('antrians.klinik_id', $selectedKlinikId)
                 ->where('antrians.tanggal', $tanggal)
-                ->where('pasiens.status', 'completed') // pastikan ini sesuai data
+                ->where('pasiens.status', 'completed')
                 ->count();
+        }
+
+        // Ambil data pasien jika ada
+        if ($pasienId) {
+            $pasien = \App\Models\Pasien::with('antrian')->find($pasienId);
+            $nomorAntrian = $pasien?->antrian?->nomor;
         }
 
         return view('landingpage.antrian', [
@@ -58,9 +60,8 @@ class LandingPageController extends Controller
             'selectedKlinikId' => $selectedKlinikId,
             'statistik' => $statistik,
             'nomorAntrian' => $nomorAntrian,
-            'pasienNama' => $pasienNama
+            'pasienNama' => $pasien?->nama,
         ]);
-
-
     }
+
 }

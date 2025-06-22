@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <title>Pendaftaran Antrian - Antri Klinik</title>
@@ -8,7 +8,7 @@
     <!-- Bootstrap & Font -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    
+
     <style>
         body { font-family: 'Segoe UI', sans-serif; }
         .topbar { background-color: #006871; padding: 8px 40px; }
@@ -17,12 +17,18 @@
         .navbar-brand { display: flex; align-items: center; gap: 8px; font-weight: bold; color: #006666; }
         .navbar-brand img { height: 40px; }
         .nav-link { color: #006871; margin-left: 25px; font-weight: 500; }
-        .form-wrapper { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px 20px; }
+        .form-wrapper { padding: 60px 20px; }
         footer { background-color: #003c3c; color: white; padding: 20px 40px; margin-top: 80px; }
-        footer .footer-links { display: flex; justify-content: flex-end; gap: 30px; }
+        footer .footer-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 30px; }
         .footer-links a { color: white; text-decoration: none; }
         .btn-teal { background-color: #006871; color: white; }
         .btn-teal:hover { background-color: #004f4f; }
+        @media (max-width: 768px) {
+            .footer-links {
+                justify-content: center;
+                margin-top: 10px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -33,41 +39,27 @@
     </div>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-custom px-4">
-        <a class="navbar-brand" href="{{ route('landingpage.index') }}">
-            <img src="{{ asset('admin/images/logo.png') }}" alt="Logo" height="40">
-            Antri <span>Klinik</span>
-        </a>
-        <div class="collapse navbar-collapse justify-content-end">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('landingpage.index') }}#tentang">Tentang Kami</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('landingpage.infoklinik') }}">Info Klinik</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('landingpage.antrian') }}">Daftar Antrian</a>
-                </li>
-
-                {{-- Tampilkan menu Pendaftaran hanya jika sudah login --}}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ auth()->check() ? route('landingpage.pendaftaran') : route('login') }}">
-                        Pendaftaran
-                    </a>
-                </li>
-
-                {{-- Tampilkan tombol Login jika belum login, jika sudah login tampilkan nama user atau Logout --}}
-                @guest
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">Login</a>
-                </li>
-                @endguest
-                @auth
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand" href="{{ route('landingpage.index') }}">
+                <img src="{{ asset('admin/images/logo.png') }}" alt="Logo">
+                Antri <span>Klinik</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarMain">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="{{ route('landingpage.index') }}#tentang">Tentang Kami</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('landingpage.infoklinik') }}">Info Klinik</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('landingpage.antrian') }}">Daftar Antrian</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ auth()->check() ? route('landingpage.pendaftaran') : route('login') }}">Pendaftaran</a></li>
+                    @guest
+                    <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
+                    @endguest
+                    @auth
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ Auth::user()->name }}
-                        </a>
+                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">{{ Auth::user()->name }}</a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
@@ -77,29 +69,29 @@
                             </li>
                         </ul>
                     </li>
-                @endauth
-
-                
-            </ul>
+                    @endauth
+                </ul>
+            </div>
         </div>
     </nav>
 
     <!-- Pendaftaran Section -->
     <div class="container-fluid form-wrapper">
-        <div class="row w-100">
+        <div class="row align-items-center">
             <!-- Gambar kiri -->
-            <div class="col-md-6 text-center d-none d-md-flex align-items-center justify-content-center">
+            <div class="col-md-6 text-center mb-4 mb-md-0">
                 <img src="{{ asset('admin/images/daftar.png') }}" alt="Daftar Image" class="img-fluid" style="max-height: 500px;">
             </div>
 
             <!-- Form kanan -->
-            <div class="col-md-6 d-flex align-items-center justify-content-center">
-                <div style="width: 100%; max-width: 480px;">
+            <div class="col-md-6">
+                <div class="mx-auto" style="max-width: 480px;">
                     @auth
                         <h3 class="text-center mb-4 fw-bold">Form Pendaftaran Antrian</h3>
-                        <form method="POST" action="{{ route('pasien.store') }}">
+                        <form method="POST" action="{{ route('pasien.store.user') }}">
                             @csrf
                             <input type="hidden" name="source" value="user">
+
 
                             <div class="mb-3">
                                 <label for="klinik_id" class="form-label">Pilih Klinik</label>
@@ -128,13 +120,11 @@
                                     <option value="P">Perempuan</option>
                                 </select>
                             </div>
+
                             <div class="mb-3">
                                 <label for="tanggal" class="form-label">Tanggal</label>
                                 <input type="date" name="tanggal" class="form-control" required>
                             </div>
-
-                            
-
 
                             <div class="mb-3">
                                 <label for="keluhan" class="form-label">Keluhan</label>
@@ -159,7 +149,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="d-flex justify-content-between align-items-center">
+    <footer class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 px-4 py-3">
         <div><strong>AntriKlinik</strong><br>Developed by Blackcassava</div>
         <div class="footer-links">
             <a href="#">Global</a>
@@ -169,6 +159,6 @@
         </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

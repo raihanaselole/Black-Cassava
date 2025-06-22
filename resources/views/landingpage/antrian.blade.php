@@ -9,7 +9,6 @@
     <style>
         .hero {
             background-color: #f8f9fa;
-            padding: 60px 0;
         }
         .card-antrian {
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
@@ -25,7 +24,6 @@
             border-bottom: 2px solid #ddd;
             padding: 15px 40px;
         }
-
         .navbar-brand {
             display: flex;
             align-items: center;
@@ -33,45 +31,13 @@
             font-weight: bold;
             color: #006666;
         }
-
         .navbar-brand img {
             height: 40px;
         }
-
         .nav-link {
             color: #006871;
             margin-left: 25px;
             font-weight: 500;
-        }
-        .form-wrapper {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
-        }
-        footer {
-            background-color: #003c3c;
-            color: white;
-            padding: 20px 40px;
-            margin-top: 80px;
-        }
-
-        footer .footer-links {
-            display: flex;
-            justify-content: flex-end;
-            gap: 30px;
-        }
-
-        .footer-links a {
-            color: white;
-            text-decoration: none;
-        }
-        .nav-top {
-            background-color: #006871;
-            color: white;
-            font-size: 14px;
-            padding: 5px 0;
         }
         .topbar {
             background-color: #006871;
@@ -82,84 +48,84 @@
             color: white;
             font-size: 14px;
         }
+        footer {
+            background-color: #003c3c;
+            color: white;
+            padding: 20px 40px;
+        }
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-link {
+                margin-left: 0;
+            }
+            .footer-links {
+                justify-content: center !important;
+                gap: 15px;
+                flex-wrap: wrap;
+            }
+        }
     </style>
 </head>
 <body>
 
 <!-- Navbar Top Info -->
 <div class="topbar">
-        <p class="text-end">Hubungi kami: +62 856-9098-9098</p>
-    </div>
+    <p class="text-end">Hubungi kami: +62 856-9098-9098</p>
+</div>
 
 <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-custom px-4">
+<nav class="navbar navbar-expand-lg navbar-custom">
+    <div class="container-fluid px-4">
         <a class="navbar-brand" href="{{ route('landingpage.index') }}">
-            <img src="{{ asset('admin/images/logo.png') }}" alt="Logo" height="40">
+            <img src="{{ asset('admin/images/logo.png') }}" alt="Logo">
             Antri <span>Klinik</span>
         </a>
-        <div class="collapse navbar-collapse justify-content-end">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarMain">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('landingpage.index') }}#tentang">Tentang Kami</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('landingpage.infoklinik') }}">Info Klinik</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('landingpage.antrian') }}">Daftar Antrian</a>
-                </li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('landingpage.index') }}#tentang">Tentang Kami</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('landingpage.infoklinik') }}">Info Klinik</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('landingpage.antrian') }}">Daftar Antrian</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ auth()->check() ? route('landingpage.pendaftaran') : route('login') }}">Pendaftaran</a></li>
 
-                {{-- Tampilkan menu Pendaftaran hanya jika sudah login --}}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ auth()->check() ? route('landingpage.pendaftaran') : route('login') }}">
-                        Pendaftaran
-                    </a>
-                </li>
-
-                {{-- Tampilkan tombol Login jika belum login, jika sudah login tampilkan nama user atau Logout --}}
                 @guest
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">Login</a>
-                </li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>
                 @endguest
                 @auth
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" role="button" aria-expanded="false">
-                            {{ Auth::user()->name }}
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li>
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <button class="dropdown-item text-danger" type="submit">Logout</button>
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">{{ Auth::user()->name }}</a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button class="dropdown-item text-danger" type="submit">Logout</button>
+                            </form>
+                        </li>
+                    </ul>
+                </li>
                 @endauth
-
-                
             </ul>
         </div>
-    </nav>
+    </div>
+</nav>
 
 <!-- Hero Section -->
 <section class="hero py-5 bg-light">
     <div class="container">
-        <div class="row align-items-center">
-            <!-- Kolom Kiri: Teks -->
+        <div class="row align-items-center text-center text-lg-start">
             <div class="col-lg-6 mb-4 mb-lg-0">
                 <h2 style="color: #006871;">Pendaftaran Antrian Klinik</h2>
                 <p class="text-secondary">Mudah dan Efisien dalam Daftar Antrian</p>
-                <p class="mb-4">
-                    Daftarkan diri Anda secara online dengan mudah dan cepat. Pantau status pemeriksaan Anda, 
-                    perbarui data pribadi, dan nikmati pelayanan tanpa antre panjang.
-                </p>
-                <a href="{{ auth()->check() ? route('landingpage.pendaftaran') : route('login') }}" class="btn btn-success">Daftar Sekarang</a>
+                <p>Daftarkan diri Anda secara online dengan mudah dan cepat. Pantau status pemeriksaan Anda, perbarui data pribadi, dan nikmati pelayanan tanpa antre panjang.</p>
+                <a href="{{ auth()->check() ? route('landingpage.pendaftaran') : route('login') }}" class="btn btn-success mt-3">Daftar Sekarang</a>
             </div>
-
-            <!-- Kolom Kanan: Gambar -->
-            <div class="col-lg-6 text-center">
+            <div class="col-lg-6">
                 <img src="{{ asset('admin/images/antri.png') }}" alt="Gambar Antrian" class="img-fluid" style="max-height: 320px;">
             </div>
         </div>
@@ -167,6 +133,7 @@
 </section>
 
 
+<!-- Nomor Antrian -->
 <!-- Nomor Antrian -->
 <section class="py-5">
     <div class="container text-center">
@@ -178,26 +145,27 @@
             @else
                 <h1 class="display-4 text-secondary">Belum Ada</h1>
             @endif
-
-
-
-
         </div>
     </div>
 </section>
+
 
 <!-- Pilih Klinik -->
 <section class="section-gray py-5">
     <div class="container">
         <form method="GET" action="{{ route('landingpage.antrian') }}">
-            <select name="klinik_id" class="form-select mx-auto mb-3" style="max-width: 400px;" onchange="this.form.submit()">
-                <option selected disabled>-- Pilih Klinik --</option>
-                @foreach($kliniks as $klinik)
-                    <option value="{{ $klinik->id }}" {{ $selectedKlinikId == $klinik->id ? 'selected' : '' }}>
-                        {{ $klinik->nama_klinik }}
-                    </option>
-                @endforeach
-            </select>
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-sm-10">
+                    <select name="klinik_id" class="form-select" onchange="this.form.submit()">
+                        <option selected disabled>-- Pilih Klinik --</option>
+                        @foreach($kliniks as $klinik)
+                            <option value="{{ $klinik->id }}" {{ $selectedKlinikId == $klinik->id ? 'selected' : '' }}>
+                                {{ $klinik->nama_klinik }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
         </form>
     </div>
 </section>
@@ -208,41 +176,39 @@
         <h4 style="color: #006871;">Antrian Klinik</h4>
         <p class="text-muted">Data antrian hari ini</p>
         <div class="row justify-content-center">
-            <div class="col-md-3 col-sm-6 mb-3">
+            <div class="col-12 col-sm-6 col-md-4 mb-3">
                 <div class="card-antrian bg-white">
-                    <h5>Pasien Menunggu</h5>
+                    <h5>Pasien Terdaftar</h5>
                     <h2 class="text-danger">{{ $statistik['menunggu'] }}</h2>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6 mb-3">
+            <div class="col-12 col-sm-6 col-md-4 mb-3">
                 <div class="card-antrian bg-white">
                     <h5>Pasien sedang dilayani</h5>
                     <h2>{{ $statistik['dilayani'] }}</h2>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6 mb-3">
+            <div class="col-12 col-sm-6 col-md-4 mb-3">
                 <div class="card-antrian bg-white">
                     <h5>Pasien Selesai</h5>
                     <h2 class="text-success">{{ $statistik['selesai'] }}</h2>
                 </div>
             </div>
-            
         </div>
     </div>
 </section>
 
 <!-- Footer -->
-<footer class="d-flex justify-content-between align-items-center">
-        <div><strong>AntriKlinik</strong><br>Developed by Blackcassava</div>
-        <div class="footer-links">
-            <a href="#">Global</a>
-            <a href="#">Indonesia</a>
-            <a href="#">Provinsi</a>
-            <a href="#">About</a>
-        </div>
-    </footer>
+<footer class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 px-4 py-3">
+    <div><strong>AntriKlinik</strong><br>Developed by Blackcassava</div>
+    <div class="footer-links d-flex flex-wrap justify-content-center justify-content-md-end gap-3">
+        <a href="#">Global</a>
+        <a href="#">Indonesia</a>
+        <a href="#">Provinsi</a>
+        <a href="#">About</a>
+    </div>
+</footer>
 
-<!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

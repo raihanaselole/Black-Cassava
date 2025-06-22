@@ -17,16 +17,26 @@ Route::get('/infoklinik', function () {
     return view('/landingpage/infoklinik');
 })->name('landingpage.infoklinik');
 
-Route::get('/antrian', function () {
-    return view('/landingpage/antrian');
-})->name('landingpage.antrian');
+// Route::get('/antrian', function () {
+//     return view('/landingpage/antrian');
+// })->name('landingpage.antrian');
+
+// Member
+Route::middleware(['auth'])->get('/pendaftaran', [PasienController::class, 'createUser'])->name('landingpage.pendaftaran');
+
+// Admin
+Route::middleware(['auth', 'is_admin'])->get('/dashboard/pasien/create', [PasienController::class, 'createAdmin'])->name('pasien.create');
+
+// 🟢 Route store untuk user (member)
+Route::middleware(['auth'])->post('/pendaftaran', [PasienController::class, 'store'])->name('pasien.store.user');
+
 
 // 🔐 Akses hanya untuk user yang sudah login
-Route::middleware(['auth'])->group(function () {
-    Route::get('/pendaftaran', function () {
-        return view('/landingpage/pendaftaran');
-    })->name('landingpage.pendaftaran');
-});
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/pendaftaran', function () {
+//         return view('/landingpage/pendaftaran');
+//     })->name('landingpage.pendaftaran');
+// });
 
 
 // Route::prefix('dashboard/klinik')->name('klinik.')->group(function () {
@@ -90,7 +100,7 @@ Route::middleware(['auth', 'is_admin'])->prefix('dashboard')->group(function () 
 
     Route::prefix('pasien')->name('pasien.')->group(function () {
         Route::get('/', [PasienController::class, 'index'])->name('index');
-        Route::get('/create', [PasienController::class, 'create'])->name('create');
+        // Route::get('/create', [PasienController::class, 'create'])->name('create');
         Route::post('/store', [PasienController::class, 'store'])->name('store');
         Route::get('/show/{id}', [PasienController::class, 'show'])->name('show');
         Route::get('/edit/{id}', [PasienController::class, 'edit'])->name('edit');
@@ -108,9 +118,8 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/pendaftaran', [PasienController::class, 'create'])->name('landingpage.pendaftaran');
-});
+Route::middleware(['auth'])->get('/pendaftaran', [PasienController::class, 'createUser'])->name('landingpage.pendaftaran');
+
 
 Route::get('/antrian', [LandingPageController::class, 'antrian'])->name('landingpage.antrian');
 

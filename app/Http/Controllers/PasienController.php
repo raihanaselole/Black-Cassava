@@ -8,7 +8,6 @@ use App\Models\Antrian;
 use App\Models\Klinik;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Cookie;
 
 
 class PasienController extends Controller
@@ -16,6 +15,7 @@ class PasienController extends Controller
     /**
      * Display a listing of the resource.
      */
+
     public function index()
     {
         // Ambil semua pasien beserta antriannya
@@ -29,13 +29,27 @@ class PasienController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+    public function createUser()
+    {
+        $kliniks = Klinik::all();
+
+        return view('landingpage.pendaftaran', compact('kliniks'));
+    }
+    public function createAdmin()
+    {
+        $kliniks = Klinik::all();
+
+        return view('dashboard.pasien.create', compact('kliniks'));
+    }
+
+
     public function create()
     {
-        $kliniks = Klinik::all(); // Ambil semua data klinik
-        return view('landingpage.pendaftaran', compact('kliniks'));
+        // $kliniks = Klinik::all(); // Ambil semua data klinik
+        // return view('landingpage.pendaftaran', compact('kliniks'));
         
-        $kliniks = Klinik::all(); // ambil semua data klinik
-        return view('dashboard.pasien.create', compact('kliniks'));
+        // $kliniks = Klinik::all(); // ambil semua data klinik
+        // return view('dashboard.pasien.create', compact('kliniks'));
     }
 
     /**
@@ -80,18 +94,17 @@ class PasienController extends Controller
 
             // 🔍 Deteksi asal form dari input hidden 'source'
             if ($request->input('source') === 'user') {
-                return redirect()->route('landingpage.antrian', ['klinik_id' => $request->klinik_id])
-                    ->withCookies([
-                        cookie()->forever('nomor_antrian', $nextNomor),
-                        cookie()->forever('klinik_id', $request->klinik_id),
-                        cookie()->forever('pasien_nama', $pasien->nama),
-                    ]);
+                return redirect()->route('landingpage.antrian', [
+                'klinik_id' => $request->klinik_id,
+                'pasien_id' => $pasien->id
+            ]);
 
             }
 
-            // Default: dari dashboard admin
-            return redirect()->route('pasien.index')
-                ->with('pesan', 'Pasien berhasil ditambahkan dengan nomor antrian: ' . $nextNomor);
+                // Jika tidak dari user (berarti admin)
+                return redirect()->route('pasien.index')
+                    ->with('pesan', 'Pasien berhasil ditambahkan dengan nomor antrian: ' . $nextNomor);
+
 
         } catch (\Exception $e) {
             DB::rollBack();

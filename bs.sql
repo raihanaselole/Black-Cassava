@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 21 Jun 2025 pada 15.30
+-- Waktu pembuatan: 22 Jun 2025 pada 15.59
 -- Versi server: 10.4.28-MariaDB
 -- Versi PHP: 8.2.4
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `black_manpro`
+-- Database: `bs`
 --
 
 -- --------------------------------------------------------
@@ -36,6 +36,14 @@ CREATE TABLE `antrians` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data untuk tabel `antrians`
+--
+
+INSERT INTO `antrians` (`id`, `pasien_id`, `klinik_id`, `tanggal`, `nomor`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, '2025-06-22', 1, '2025-06-22 06:54:55', '2025-06-22 06:54:55'),
+(2, 2, 1, '2025-06-22', 2, '2025-06-22 06:56:28', '2025-06-22 06:56:28');
 
 -- --------------------------------------------------------
 
@@ -133,9 +141,7 @@ CREATE TABLE `kliniks` (
 --
 
 INSERT INTO `kliniks` (`id`, `nama_klinik`, `alamat`, `no_telp`, `email`, `created_at`, `updated_at`) VALUES
-(1, 'Klinik Kita 1 & 2', 'Jl. Jambi No.17, Grogol, Limo, Kota Depok', '(021)77268810', 'klinikkita@gmail.com', '2025-06-21 06:12:16', '2025-06-21 06:12:16'),
-(2, 'Klinik Agha', 'Jl. Bojong Rangkek I, Cipayung Jaya, Kota Depok', '0822-7560-1002', 'klinikagha@gmail.com', '2025-06-21 06:12:56', '2025-06-21 06:12:56'),
-(3, 'Klinik Utama Pertamina IHC Depok', 'Jl. Margonda, Pondok Cina, Kota Depok', '0819-5262-5003', 'ihc@gmail.com', '2025-06-21 06:13:42', '2025-06-21 06:13:42');
+(1, 'Klinik Kita 1 & 2', 'Jl. Jambi No.17, Grogol, Limo, Kota Depok', '(021)77268810', 'klinikkita@gmail.com', '2025-06-22 06:54:32', '2025-06-22 06:54:32');
 
 -- --------------------------------------------------------
 
@@ -179,6 +185,14 @@ CREATE TABLE `pasiens` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data untuk tabel `pasiens`
+--
+
+INSERT INTO `pasiens` (`id`, `klinik_id`, `nama`, `status`, `tanggal`, `keluhan`, `nik`, `created_at`, `updated_at`) VALUES
+(1, 1, 'suep', 'in progress', '2025-06-22', 'sakit', '235425423', '2025-06-22 06:54:55', '2025-06-22 06:57:32'),
+(2, 1, 'uhuy', 'not started', '2025-06-22', 'puyeng', '23542354', '2025-06-22 06:56:27', '2025-06-22 06:56:27');
+
 -- --------------------------------------------------------
 
 --
@@ -211,7 +225,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('7MTRMmSOREhMZImpmmy6TJRrMHagpYp1GORjoHt2', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiR3FFbEYyWmswcEJFcWtpaEtza1Ezc2c4cUpjREc5SDZCc0N1MzVONSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9kYXNoYm9hcmQiO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToyO30=', 1750511753);
+('e3jTDzJmEQGvvfsKKDVpQJPEUZgZ1JpvBA52Fi4g', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiMTBDRXVNZmptbjFrQ3JjRFJCdmZsRzMyQVIxSDJEa05HTTgwbHRWWSI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9hbnRyaWFuP2tsaW5pa19pZD0xIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6Mjt9', 1750600696),
+('PT4A59wTSNxInty0ifRDSimw81Zve2ywj4wLM8wq', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoieW5KRkVjZkd4bGd3bzdWWHpoWk5ranlEWFlmalFHMGVFZWp2ajZzUiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDE6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9hbnRyaWFuP2tsaW5pa19pZD0xIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1750600341);
 
 -- --------------------------------------------------------
 
@@ -241,8 +256,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `nik`, `jenis_kelamin`, `no_telp`, `tanggal_lahir`, `email`, `email_verified_at`, `password`, `role`, `gambar`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', '283478925', 'L', '08783753252', '2025-06-21', 'admin@gmail.com', NULL, '$2y$12$RyOoidSdBml2g5.zER4MXOHwDFjAl3JWPokRU0VCR2PIzvk/7AQSO', 'admin', NULL, NULL, '2025-06-21 06:10:21', '2025-06-21 06:10:21'),
-(2, 'admin2', '34535', 'P', '9023573', '2025-06-21', 'admin2@gmail.com', NULL, '$2y$12$hL9z2Z0KwOUR/BQ3oqyYX.7QpUXwt9LAKF.Gradmk9H0xXrCo5miy', 'admin', NULL, NULL, '2025-06-21 06:15:01', '2025-06-21 06:15:01');
+(1, 'admin', '435353', 'L', '08347835342', '2025-06-04', 'admin@gmail.com', NULL, '$2y$12$fgZERgU2/UZmi19vIlT4neO86OrxPjU61ycUlhf.4OjRGZLLnx44O', 'admin', NULL, NULL, '2025-06-22 06:53:13', '2025-06-22 06:53:13'),
+(2, 'owerjoaw', '3453635', 'P', '5464364', '2025-06-22', 'y@gmail.com', NULL, '$2y$12$t21IpwxjG19Kpe1LK70HnO6fGqbsQ.lc42ZwCzYeZOa91vuJlGhKC', 'member', NULL, NULL, '2025-06-22 06:55:34', '2025-06-22 06:55:34');
 
 --
 -- Indexes for dumped tables
@@ -338,7 +353,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `antrians`
 --
 ALTER TABLE `antrians`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `failed_jobs`
@@ -356,7 +371,7 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT untuk tabel `kliniks`
 --
 ALTER TABLE `kliniks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `migrations`
@@ -368,7 +383,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT untuk tabel `pasiens`
 --
 ALTER TABLE `pasiens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
